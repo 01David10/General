@@ -1,0 +1,191 @@
+
+# include <iostream>
+# include <string.h>
+
+using namespace std;
+
+// programa que convierte 2 vectores en uno nuevo (union entre los 2)
+
+// parametrizacion
+void MENU (void);
+void LLENAR (short[], short[], short &, short &);
+void UNION (short[], short[], short[], short, short);
+void MOSTRAR (short[], short, short);
+void LEER (short [], short, short);
+void POSICION (short [], short [], short, short);
+void BUSCAR (short [], short, short);
+
+// programa principal
+int main ()
+{
+    MENU ();  
+}
+
+// funcion para menu
+void MENU (void)
+{
+    // variables
+    short Opcion, A[100], B[100], C[100], Posiciones[100], N, M;
+
+    do
+    {
+        cout << "Menu de opciones" << endl;
+        cout << "Por favor ingrese la opcion que desea: " << endl;
+
+        cout << "1 - Llenar vector C, a partir de los A y B" << endl;
+        cout << "2 - Mostrar la posicion del numero mayor" << endl;
+        cout << "3 - Busqueda secuencial" << endl;
+        
+        cin >> Opcion;
+
+        switch (Opcion)
+        {
+            case 1:
+                LLENAR (A, B, N, M);
+                UNION (A, B, C, N, M);
+                MOSTRAR (C, N, M);
+            break;
+
+            case 2:
+                POSICION (C, Posiciones, N, M);
+            break;
+
+            case 3:
+                BUSCAR (C, N, M);
+            break;
+        
+            default:
+                exit (0);
+            break;
+        }
+    }
+    while (Opcion);
+}
+
+// procedimiento para llenar el vector A y B
+void LLENAR (short A[], short B[], short &N, short &M)
+{
+    // variables
+    short Indice_F;
+
+    cout << "Ingrese la cantidad de elementos del vector A ";
+    cin >> N;
+
+    for (Indice_F = 1; Indice_F <= N; Indice_F ++)
+    {
+        cout << "Ingrese el elemento " << Indice_F << " ";
+        cin >> A [Indice_F]; 
+    }
+
+    cout << "Ingrese la cantidad de elementos del vector B ";
+    cin >> M;
+
+    for (Indice_F = 1; Indice_F <= M; Indice_F ++)
+    {
+        cout << "Ingrese el elemento " << Indice_F << " ";
+        cin >> B [Indice_F]; 
+    }
+}
+
+// procedimiento para crear el vector C
+void UNION (short A[], short B[], short C[], short N, short M)
+{
+    // variables
+    short Indice_F, Indice_B;
+
+    Indice_B = 1;
+
+    for (Indice_F = 1; Indice_F <= N; Indice_F ++)
+    {
+        C[Indice_F] = A[Indice_F];
+    }
+
+    for (Indice_F = N+1; Indice_F <= N+M; Indice_F ++)
+    {
+        C[Indice_F] = B[Indice_B];
+        Indice_B ++;
+    }
+}
+
+// procedimiento para mostar
+void MOSTRAR (short C[], short N, short M)
+{
+    // variables
+    short Indice_F;
+
+    for (Indice_F = 1; Indice_F <= N+M; Indice_F ++)
+    {
+        cout << C [Indice_F] << endl;
+    }
+}
+
+// procedimiento para leer
+void LEER (short C[], short N, short M)
+{
+    // variables
+    short Indice_F;
+
+    for (Indice_F = 1; Indice_F <= N+M; Indice_F ++)
+    {
+        cin >> C [Indice_F];
+    }
+}
+
+// procedimiento para encontrar la posicion del numero mayor
+void POSICION (short C[], short Posiciones[], short N, short M)
+{
+    // variables
+    short Indice_F, Mayor, j, Posicion[100];
+    
+    Mayor = 0;
+    j = 1;
+
+    for (Indice_F = 1; Indice_F <= N+M; Indice_F ++)
+    {
+        if (C [Indice_F] > Mayor)
+        {
+            Mayor = C[Indice_F];
+        }
+    }
+
+    for (Indice_F = 1; Indice_F <= N+M; Indice_F ++)
+    {
+        if (C [Indice_F] == Mayor)
+        {
+            Posiciones[j] = Indice_F;
+            j ++;
+        }
+    }
+    
+    cout << "El numero mayor esta en las posiciones: " << endl;
+    for (Indice_F = 1; Indice_F <= j-1; Indice_F ++)
+    {
+        cout << Posiciones[Indice_F] << endl;
+    }
+}
+
+// procedimiento para buscar
+void BUSCAR (short C[], short N, short M)
+{
+    // variables
+    short i, Vr_Buscar;
+
+    i = 1;
+
+    cout << "Ingrese el elemento que desea buscar: ";
+    cin >> Vr_Buscar;
+
+    while (i <= N+M && Vr_Buscar != C [i])
+    {
+        i = i + 1;
+    }
+
+    if (i <= N+M)
+    {
+        cout << "El elemento buscado se encuentra en la posicion: " << i << endl;
+    }
+    else
+    {
+        cout << "El elemento buscado no se encuentra en el vector" << endl;
+    }
+}
