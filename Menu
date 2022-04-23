@@ -1,0 +1,42 @@
+// funcion para menu
+void MENU (void)
+{
+    // variables
+    short Opcion, A[100], B[100], C[100], Posiciones[100], N, M;
+
+    do
+    {
+        cout << "Menu de opciones" << endl;
+        cout << "Por favor ingrese la opcion que desea: " << endl;
+
+        cout << "1 - Llenar vector C, a partir de los A y B" << endl;
+        cout << "2 - Mostrar la posicion del numero mayor" << endl;
+        cout << "3 - Busqueda secuencial" << endl;
+        
+        cin >> Opcion;
+
+        switch (Opcion)
+        {
+            case 1:
+                LLENAR (A, B, N, M);
+                UNION (A, B, C, N, M);
+                MOSTRAR (C, N, M);
+            break;
+
+            case 2:
+                POSICION (C, Posiciones, N, M);
+            break;
+
+            case 3:
+                BUSCAR (C, N, M);
+            break;
+        
+            default:
+                exit (0);
+            break;
+        }
+    }
+    while (Opcion);
+}
+
+// solo cambiar las variables y opciones
